@@ -10,6 +10,12 @@ class App extends Component {
           <p>
             Welcome to Fitness Pal
           </p>
+          <p>
+            Signup
+          </p>
+          <p>
+            Login
+          </p>
 
         </header>
       </div>
