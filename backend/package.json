@@ -9,9 +9,12 @@
   "author": "jpotrat",
   "license": "ISC",
   "dependencies": {
+    "Router": "^2.1.0",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
     "firebase-admin": "^7.3.0",
     "nodemon": "^1.18.11",
+    "router": "^1.3.3",
     "twit": "^2.2.11"
   }
 }

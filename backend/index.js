@@ -29,3 +29,5 @@ firebase.auth().signInWithPopup(provider).then(function(result) {
   // ...
 });
 });
+
+module.exports = router
