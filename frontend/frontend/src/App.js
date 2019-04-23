@@ -38,6 +38,10 @@ class App extends Component {
           <input type="text" name="username">
           </input>
           <br></br>
+          Password:<br></br>
+          <input type="text" name="pass">
+          </input>
+          <br></br>
           <input type="submit" name="Submit">
           </input>
         </form>
