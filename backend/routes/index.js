@@ -5,6 +5,8 @@ const router = require('express').Router()
 const firebase = require('firebase');
 const functions = require('firebase-functions');
 
+var token = new Boolean(false);
+
 var serviceAccount = require('../serviceAccountKey.json');
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -15,7 +17,25 @@ admin.initializeApp({
 var db = admin.firestore();
 var users = db.collection('users')
 
-console.log("hey there");
+router.post('/login', (req, res, next) => {
+	var email = req.body.email
+	var password = req.body.password
+	if(token){
+		return res.status(409).json({err: "already logged in as another user"})
+	}
+	else{
+		users.where('email', '==', email).get()
+			.then(snapshot => {
+				if(snapshot.empty){
+					return res.status(401).json({err: "no user associated with that email"})
+				}
+				});
+		token = true
+		return res.status(200).json
+	}
+
+});
+
 
 router.post('/auth', (req, res, next) => {
 //auth here with signup
