@@ -8,6 +8,7 @@ import {
   BrowserRouter as Router,
   Route
 } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 class App extends Component {
 
@@ -27,6 +28,7 @@ class App extends Component {
 
 
 
+
     onChange = event => {
   		this.setState({ [event.target.name]: event.target.value });
   	};
@@ -37,20 +39,6 @@ class App extends Component {
       <div className="App">
 
         <header className="App-header">
-
-        <form action="http://localhost:3000/auth" method="post">
-          Username:<br></br>
-          <input type="text" name="username">
-          </input>
-          <br></br>
-          Password:<br></br>
-          <input type="text" name="password">
-          </input>
-          <br></br>
-          <input type="submit" name="Submit">
-          </input>
-        </form>
-
 
         <form action="./signin/signin" style={{padding: 16}}>
         <Router>

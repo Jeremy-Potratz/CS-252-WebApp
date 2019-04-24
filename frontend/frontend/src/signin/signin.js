@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import * as ROUTES from '../routes/routes';
 import { Notification, Heading, Columns, Button } from 'react-bulma-components';
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import App from '../App';
 
 class SignIn extends Component {
 
@@ -27,28 +33,25 @@ class SignIn extends Component {
 
   render() {
     return (
-      <div className="SignIn">
+      <form action="http://localhost:3000/auth" method="post">
+        Username:<br></br>
+        <input type="text" name="username">
+        </input>
+        <br></br>
+        Password:<br></br>
+        <input type="text" name="username">
+        </input>
+        <br></br>
+        <input type="submit" name="Submit">
+        </input>
 
-        <header className="SignIn-header">
+        <Router>
+            <div>
+        <Route path={ROUTES.LANDING} component={App} />
+        </div>
+        </Router>
 
-        <form>
-          Check<br></br>
-          <input type="submit" name="Submit">
-          </input>
-        </form>
-
-
-        <form onSubmit={this.onSubmit} style={{padding: 16}}>
-
-          <p>
-            Welcome to Fitness Pal
-          </p>
-          <Button className="is-fullwidth" type="submit">
-          			Sign In
-          </Button>
-          </form>
-        </header>
-      </div>
+      </form>
     );
   }
 }
