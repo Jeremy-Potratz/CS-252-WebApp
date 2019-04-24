@@ -5,7 +5,7 @@ const router = require('express').Router()
 const firebase = require('firebase');
 const functions = require('firebase-functions');
 
-var serviceAccount = require('/Users/jeremyottopotratz/Desktop/cs-252-WebApp/backend/serviceAccountKey.json');
+var serviceAccount = require('../serviceAccountKey.json');
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: 'https://CS-252-WebApp.firebaseio.com'
@@ -36,6 +36,8 @@ u["password"] = req.body.username[1];
 //u.password = hash;
 
 users.doc(req.body.username[0]).set(u)
+return
+return res.status(200).json({username: "user", password: "pass"})
 
 
 });

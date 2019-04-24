@@ -14,17 +14,17 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.onSubmit = this.onSubmit.bind(this);
+    // this.onSubmit = this.onSubmit.bind(this);
   }
-
-  onSubmit(ev){
-    ev.preventDefault();
-    console.log("hello");
-  		fetch(ROUTES.BASE_URL + "/app/auth", {
-  			mode: 'cors',
-  			method: 'POST'
-  		});
-  	};
+  //
+  // onSubmit(ev){
+  //   ev.preventDefault();
+  //   console.log("hello");
+  // 		fetch(ROUTES.BASE_URL + "/app/auth", {
+  // 			mode: 'cors',
+  // 			method: 'POST'
+  // 		});
+  // 	};
 
 
 

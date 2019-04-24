@@ -6,7 +6,6 @@ import {
   Route
 } from 'react-router-dom';
 import { Link, withRouter } from 'react-router-dom';
-import App from '../App';
 
 class SignIn extends Component {
 
@@ -44,12 +43,6 @@ class SignIn extends Component {
         <br></br>
         <input type="submit" name="Submit">
         </input>
-
-        <Router>
-            <div>
-        <Route path={ROUTES.LANDING} component={App} />
-        </div>
-        </Router>
 
       </form>
     );
