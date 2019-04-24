@@ -3,6 +3,11 @@ import logo from './logo.svg';
 import './App.css';
 import * as ROUTES from './routes/routes';
 import { Notification, Heading, Columns, Button } from 'react-bulma-components';
+import SignInPage from './signin/signin';
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom';
 
 class App extends Component {
 
@@ -39,7 +44,7 @@ class App extends Component {
           </input>
           <br></br>
           Password:<br></br>
-          <input type="text" name="pass">
+          <input type="text" name="password">
           </input>
           <br></br>
           <input type="submit" name="Submit">
@@ -47,8 +52,12 @@ class App extends Component {
         </form>
 
 
-        <form onSubmit={this.onSubmit} style={{padding: 16}}>
-
+        <form action="./signin/signin" style={{padding: 16}}>
+        <Router>
+            <div>
+        <Route path={ROUTES.SIGN_IN} component={SignInPage} />
+        </div>
+        </Router>
           <p>
             Welcome to Fitness Pal
           </p>
