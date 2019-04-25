@@ -18,13 +18,13 @@ var db = admin.firestore();
 var users = db.collection('users')
 
 router.post('/login', (req, res, next) => {
-	var email = req.body.email
-	var password = req.body.password
-	if(token){
+	var email = req.body.username[0]
+	var password = req.body.username[1]
+	if(token === true){
 		return res.status(409).json({err: "already logged in as another user"})
 	}
 	else{
-		users.where('email', '==', email).get()
+		users.where('username', '==', email).get()
 			.then(snapshot => {
 				if(snapshot.empty){
 					return res.status(401).json({err: "no user associated with that email"})
@@ -56,8 +56,7 @@ u["password"] = req.body.username[1];
 //u.password = hash;
 
 users.doc(req.body.username[0]).set(u)
-return
-return res.status(200).json({username: "user", password: "pass"})
+return json({username: "user", password: "pass"})
 
 
 });

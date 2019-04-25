@@ -18,5 +18,6 @@ export const CHAT = '/chat/:id';
 export const CHAT_WITH_JOB_ID = '/chat/:id/from/:jobid';
 export const FAVORITE = '/favorite';
 export const VIEWJOBS = '/jobs/:jobid';
+export const REAL_SIGN_IN = '/realSignIn'
 
 export const BASE_URL = "http://localhost:3000"
