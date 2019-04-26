@@ -44,21 +44,45 @@ if(localStorage.getItem('user') != user){
 });
 
 router.post('/getActs', (req, res, next) => {
-res.status(200).json({
+  users.where('username', '==', localStorage.getItem('user')).get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
 
-  user: {name: "Jeremy"},
-  jobs: {job1: "Acting", job2: "Pissing"},
-  loggedIn: true,
+        res.status(200).json({
+          user: localStorage.getItem('user'),
+          jobs: doc.data().jobs,
+          loggedIn: true,
+        })
 
-
-})
+      })
+    });
 
 });
 
 router.post('/addAct', (req, res, next) => {
   var userRef = users.doc(localStorage.getItem('user'));
+  var jobArray = [];
+  //console.log(localStorage.getItem('user'));
 
-userRef.jobs;
+  users.where('username', '==', localStorage.getItem('user')).get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        //in here store password and username as local variables as well as jobs so that we can save
+        //again down there then show them
+              jobArray = doc.data().jobs;
+              jobArray.push(req.body.username)
+
+              var u = {};
+              u["username"] = doc.data().username;
+              u["password"] = doc.data().password;
+              u["jobs"] = jobArray;
+
+
+              userRef.set(u);
+
+})});
+
+
 res.redirect("http://localhost:3001/home");
 
 });
@@ -71,10 +95,10 @@ console.log(req.body.username[0]);
 console.log(req.body.username[1]);
 
 localStorage.setItem('user', req.body.username[0]);
-u = {};
+var u = {};
 u["username"] = req.body.username[0];
 u["password"] = req.body.username[1];
-u["jobs"] = {};
+u["jobs"] = [];
 
 // for (var key in req.body) {
 //     u[key] = req.body[key]
