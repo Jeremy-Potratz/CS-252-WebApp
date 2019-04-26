@@ -18,21 +18,37 @@ var db = admin.firestore();
 var users = db.collection('users')
 
 router.post('/login', (req, res, next) => {
-	var email = req.body.username[0]
+	var user = req.body.username[0]
 	var password = req.body.username[1]
-	if(token === true){
-		return res.status(409).json({err: "already logged in as another user"})
-	}
-	else{
-		users.where('username', '==', email).get()
+
+		users.where('username', '==', user).get()
 			.then(snapshot => {
-				if(snapshot.empty){
-					return res.status(401).json({err: "no user associated with that email"})
-				}
-				});
+        snapshot.forEach(doc => {
+
+                  if(password == doc.data().password){
+
+                      console.log("You made it");
+
+                  }else{
+                    console.log("[enis]")
+                  }
+
+            //      console.log(doc.data().username);
+            //      console.log(doc.data().password);
+
+                })
+              				});
 		token = true
-		return res.status(200).json
-	}
+
+            return res.redirect("http://localhost:3001/home");
+
+
+
+});
+
+
+router.post('/addAct', (req, res, next) => {
+
 
 });
 
@@ -56,8 +72,7 @@ u["password"] = req.body.username[1];
 //u.password = hash;
 
 users.doc(req.body.username[0]).set(u)
-return json({username: "user", password: "pass"})
-
+res.redirect("http://localhost:3001/home");
 
 });
 
