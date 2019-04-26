@@ -31,7 +31,7 @@ router.post('/login', (req, res, next) => {
                     localStorage.setItem('user', user);
                     return res.redirect("http://localhost:3001/home");
                   }else{
-
+                    localStorage.setItem('user', "");
                     return res.json("Wrong password, go back and try again.")
 
                   }
@@ -39,6 +39,7 @@ router.post('/login', (req, res, next) => {
 
               				});
 if(localStorage.getItem('user') != user){
+  localStorage.setItem('user', "");
   return res.redirect("http://localhost:3001/realSignIn");
 }
 });
@@ -79,11 +80,11 @@ router.post('/addAct', (req, res, next) => {
 
 
               userRef.set(u);
+              res.redirect("http://localhost:3001/home");
 
 })});
 
 
-res.redirect("http://localhost:3001/home");
 
 });
 
@@ -110,5 +111,11 @@ users.doc(req.body.username[0]).set(u)
 res.redirect("http://localhost:3001/home");
 
 });
+
+router.post('/signOut', (req, res, next) => {
+localStorage.setItem('user', "");
+res.redirect("http://localhost:3001/realsignin");
+})
+
 
 module.exports = router

@@ -9,6 +9,8 @@ const SignInPage = () => (
 <li><Link to='/home'>Home</Link></li>
 <li><Link to='/realSignIn'>Sign In</Link></li>
 <li><Link to='/signup'>Sign Up</Link></li>
+<li><Link to='/signout'>Sign Out</Link></li>
+
 	</div>
 );
 

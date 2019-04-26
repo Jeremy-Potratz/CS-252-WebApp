@@ -2,6 +2,7 @@ import React from 'react';
 import SignUpPage from './signup/signup';
 import SignInPage from './signin/signin';
 import RealSignInPage from './signin/realSignIn'
+import SignOut from './signout/signout'
 import Home from './home/home';
 
 import * as ROUTES from './routes/routes';
@@ -18,7 +19,7 @@ const App = () => (
       <Route path={ROUTES.SIGN_IN} component={SignInPage} />
       <Route path={ROUTES.HOME} component={Home} />
       <Route path={ROUTES.REAL_SIGN_IN} component={RealSignInPage} />
-
+      <Route path={ROUTES.SIGN_OUT} component={SignOut} />
 
     </div>
   </Router>
