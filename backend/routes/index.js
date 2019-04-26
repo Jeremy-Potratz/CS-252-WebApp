@@ -22,15 +22,12 @@ var users = db.collection('users')
 router.post('/login', (req, res, next) => {
 	var user = req.body.username[0]
 	var password = req.body.username[1]
-  var getUser;
 
 		users.where('username', '==', user).get()
 			.then(snapshot => {
         snapshot.forEach(doc => {
 
                   if(password == doc.data().password){
-                    getUser = 0;
-                    console.log(getUser);
                     localStorage.setItem('user', user);
                     return res.redirect("http://localhost:3001/home");
                   }else{
@@ -41,7 +38,6 @@ router.post('/login', (req, res, next) => {
                 })
 
               				});
-                      console.log(getUser);
 if(localStorage.getItem('user') != user){
   return res.redirect("http://localhost:3001/realSignIn");
 }
@@ -62,7 +58,8 @@ res.status(200).json({
 router.post('/addAct', (req, res, next) => {
   var userRef = users.doc(localStorage.getItem('user'));
 
-userRef.jobs.add(req.body.username);
+userRef.jobs;
+res.redirect("http://localhost:3001/home");
 
 });
 
