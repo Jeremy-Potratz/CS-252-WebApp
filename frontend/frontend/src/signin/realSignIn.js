@@ -30,14 +30,8 @@ render() {
   return (
 	<div>
 <p>
-Sign In!
+Sign in to your account!
 </p>
-
-<form onsubmit={this.onSubmit}>
-<Button type="submit">
-Send Data
-</Button>
-</form>
 
   <form id="mysignin" action="http://localhost:3000/login" method="post">
           Username:<br></br>
@@ -48,7 +42,7 @@ Send Data
           <input type="text" name="username">
           </input>
           <br></br>
-          <input type="submit" name="Submit">
+          <input type="submit" name="Submit" value="Sign In">
           </input>
         </form>
 

@@ -18,9 +18,8 @@ const SignUpPage = () => (
             <input type="text" name="username">
             </input>
             <br></br>
-            <input type="submit" name="Submit">
+            <input type="submit" name="Submit" value="Sign Up">
             </input>
-
           </form>
 	</div>
 );

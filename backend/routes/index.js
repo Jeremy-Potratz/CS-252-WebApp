@@ -4,6 +4,8 @@ var admin = require('firebase-admin');
 const router = require('express').Router()
 const firebase = require('firebase');
 const functions = require('firebase-functions');
+var LocalStorage = require('node-localstorage').LocalStorage,
+localStorage = new LocalStorage('./scratch');
 
 var token = new Boolean(false);
 
@@ -20,35 +22,47 @@ var users = db.collection('users')
 router.post('/login', (req, res, next) => {
 	var user = req.body.username[0]
 	var password = req.body.username[1]
+  var getUser;
 
 		users.where('username', '==', user).get()
 			.then(snapshot => {
         snapshot.forEach(doc => {
 
                   if(password == doc.data().password){
-
-                      console.log("You made it");
-
+                    getUser = 0;
+                    console.log(getUser);
+                    localStorage.setItem('user', user);
+                    return res.redirect("http://localhost:3001/home");
                   }else{
-                    console.log("[enis]")
+
+                    return res.json("Wrong password, go back and try again.")
+
                   }
-
-            //      console.log(doc.data().username);
-            //      console.log(doc.data().password);
-
                 })
+
               				});
-		token = true
+                      console.log(getUser);
+if(localStorage.getItem('user') != user){
+  return res.redirect("http://localhost:3001/realSignIn");
+}
+});
 
-            return res.redirect("http://localhost:3001/home");
+router.post('/getActs', (req, res, next) => {
+res.status(200).json({
+
+  user: {name: "Jeremy"},
+  jobs: {job1: "Acting", job2: "Pissing"},
+  loggedIn: true,
 
 
+})
 
 });
 
-
 router.post('/addAct', (req, res, next) => {
+  var userRef = users.doc(localStorage.getItem('user'));
 
+userRef.jobs.add(req.body.username);
 
 });
 
@@ -59,11 +73,11 @@ router.post('/auth', (req, res, next) => {
 console.log(req.body.username[0]);
 console.log(req.body.username[1]);
 
-
+localStorage.setItem('user', req.body.username[0]);
 u = {};
 u["username"] = req.body.username[0];
 u["password"] = req.body.username[1];
-
+u["jobs"] = {};
 
 // for (var key in req.body) {
 //     u[key] = req.body[key]
