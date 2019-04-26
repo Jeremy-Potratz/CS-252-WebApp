@@ -6,7 +6,7 @@ import { Notification, Heading, Columns, Button } from 'react-bulma-components';
 
 const INITIAL_STATE = {
   user: null,
-	acts: {},
+	acts: [],
   loggedIn: null,
   error: null
 };
@@ -16,19 +16,25 @@ class Home extends Component{
   constructor(props) {
 		super(props);
 
-    this.state = { ...INITIAL_STATE };
+    this.state = {
+      user: '',
+      acts: [],
+      loggedIn: true,
+      error: null,
+    };
 
 		fetch("http://localhost:3000/getActs", {
-			body: JSON.stringify({
-				user: "j",
-			}),
-			method: 'POST',
-      cache: 'no-cache',
-			credentials: 'same-origin',
-			headers: {
-				'content-type': 'application/json'
-			},
-			mode: 'cors'
+  			body: JSON.stringify({
+  				user: "3",
+  				token: "hi"
+  			}),
+  			cache: 'no-cache',
+  			credentials: 'same-origin',
+  			headers: {
+  				'content-type': 'application/json'
+  			},
+  			mode: 'cors',
+  			method: 'POST'
   		})
 			.then((res) => {
 				return res.json()
@@ -38,12 +44,11 @@ class Home extends Component{
 					this.setState({ error: res.err });
 				} else {
 					console.log(res)
-					this.setState({user: res.username, acts: res.acts, loggedIn: res.loggedIn });
+					this.setState({user: res.user, acts: res.acts, loggedIn: res.loggedIn });
 				}
 
 			})
 			.catch(error => {
-				console.log(error);
 				this.setState({ error });
 			});
 	}
@@ -51,12 +56,8 @@ class Home extends Component{
 
 render() {
   const {user, acts, loggedIn, error} = this.state;
-
   return(
 	<div>
-  <p>
-{user}
-  </p>
 
   <form action="http://localhost:3000/addAct" method="post">
           Activity:<br></br>
@@ -68,14 +69,15 @@ render() {
   </form>
   {(() => {
 
+    if (this.state.acts) {
+      return this.state.acts.map((act) => {
        return (
-
   <div>
-<p>Plans</p>
-<p>Hello</p>
-
-</div>
+{act}
+  </div>
 )
+})};
+
 }
 )()}
 

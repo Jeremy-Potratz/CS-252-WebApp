@@ -48,15 +48,15 @@ router.post('/getActs', (req, res, next) => {
     .then(snapshot => {
       snapshot.forEach(doc => {
 
-        res.status(200).json({
+        res.json({
           user: localStorage.getItem('user'),
-          jobs: doc.data().jobs,
+          acts: doc.data().jobs,
           loggedIn: true,
         })
+        return res.redirect("http://localhost:3001/home");
 
       })
     });
-
 });
 
 router.post('/addAct', (req, res, next) => {
